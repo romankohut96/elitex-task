@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 400px;
+
+    & label {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    & input {
+      all: unset;
+      padding: 0 10px;
+      height: 40px;
+      border: 1px solid grey;
+      border-radius: 6px;
+      align-items: center;
+
+      &::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+      }
+    }
+
+    & textarea {
+      overflow-y: scroll;
+      padding: 5px 10px;
+      resize: none;
+      height: 80px;
+      border-radius: 6px;
+    }
+
+    & span {
+      color: #f44336;
+    }
+  }
+
+  .error {
+    border-color: #f44336;
+  }
+
+  & button {
+    border-radius: 6px;
+    height: 50px;
+    border: 0;
+    background-color: #623598;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all ease-in-out 0.4s;
+
+    &:hover {
+      background-color: #7f64a1;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      pointer-events: none;
+      background-color: grey;
+    }
+  }
+}

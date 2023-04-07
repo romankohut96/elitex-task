@@ -1,0 +1,20 @@
+.button {
+  display: flex;
+  width: 120px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  color: #f44336;
+  background-color: transparent;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+  &:hover {
+    background-color: #290e0e;
+  }
+  & img {
+    height: 30px;
+    width: 30px;
+  }
+}

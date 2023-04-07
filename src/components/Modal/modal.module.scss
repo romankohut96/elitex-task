@@ -1,0 +1,28 @@
+.modal {
+  position: absolute;
+  background-color: rgb(29 29 29 / 58%);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    background-color: #ffffff;
+    width: fit-content;
+    padding: 30px 40px;
+    border-radius: 6px;
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+
+      & img {
+        cursor: pointer;
+        width: 30px;
+      }
+    }
+  }
+}

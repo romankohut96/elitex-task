@@ -1,0 +1,83 @@
+.table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  width: 100%;
+
+  tbody {
+    position: relative;
+    display: block;
+    height: 68vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    & tr:hover {
+      background-color: aliceblue;
+    }
+
+    & tr {
+      text-overflow: ellipsis;
+      height: 75px;
+    }
+  }
+
+  & td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 20px;
+  }
+
+  & thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* even columns width , fix width of table too*/
+  }
+
+  .actions {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    & img {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  & thead {
+    & tr {
+      height: 50px;
+
+      th {
+        padding: 0 20px;
+        background-color: #50218a;
+        color: white;
+        transition: all ease-in-out 0.3s;
+        &:hover {
+          cursor: pointer;
+          background-color: #8856bd;
+        }
+        &:first-child {
+          text-align: start;
+        }
+      }
+    }
+  }
+
+  .active {
+    background-color: #220344;
+  }
+
+  .textCenter {
+    text-align: center;
+  }
+
+  .textStart {
+    text-align: start;
+  }
+}

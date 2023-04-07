@@ -1,0 +1,52 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  max-width: 500px;
+  justify-content: space-evenly;
+  gap: 20px;
+
+  & p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 25px;
+  }
+
+  & div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+
+    & button {
+      width: 150px;
+      height: 50px;
+      border-radius: 6px;
+      color: #ffffff;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all ease-in-out 0.3s;
+
+      &:disabled {
+        pointer-events: none;
+        background-color: grey;
+      }
+    }
+  }
+
+  .action {
+    &Confirm {
+      background-color: #40ca36;
+      &:hover {
+        background-color: #65a061;
+      }
+    }
+    &Cancel {
+      background-color: #f44336;
+      &:hover {
+        background-color: #cc665e;
+      }
+    }
+  }
+}
