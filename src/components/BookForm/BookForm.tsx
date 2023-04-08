@@ -117,7 +117,7 @@ const BookForm: FC<BookFormProps> = ({
           ) : null}
         </div>
         <div>
-          <label htmlFor='authore'>Price</label>
+          <label htmlFor='authore'>Authore</label>
           <input
             id='authore'
             name='authore'
