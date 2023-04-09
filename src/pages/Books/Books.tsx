@@ -1,12 +1,15 @@
-import { FC, useEffect, useMemo, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
+
 import { Plus } from '../../assets'
 import { Pagination, BookForm, BooksList, ConfirmModal } from '../../components'
-import Modal from '../../components/Modal/Modal'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { bookAdd, bookDelete } from '../../redux/reducers/BookSlice'
 import { IBook } from '../../types/book'
+
 import styles from './books.module.scss'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Books: FC = () => {
   const [searchParams] = useSearchParams()
@@ -44,11 +47,19 @@ const Books: FC = () => {
     setShowConfirmModal(true)
   }
 
+  const notify = (message: string) => {
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER,
+    })
+  }
+
   const onSubmit = async ({ data, id }: { data?: IBook; id?: number }) => {
     if (!data) {
       dispatch(bookDelete(id || 0))
+      notify('Book successful deleted !')
     } else {
       dispatch(bookAdd(data))
+      notify('Book successful added !')
     }
     onClose()
   }
@@ -90,6 +101,18 @@ const Books: FC = () => {
       ) : (
         ''
       )}
+      <ToastContainer
+        position='bottom-center'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </div>
   )
 }

@@ -1,10 +1,13 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
+
 import { Edit } from '../../assets'
 import { BackButton, BookForm } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { bookUpdate } from '../../redux/reducers/BookSlice'
 import { IBook } from '../../types/book'
+
 import styles from './bookPage.module.scss'
 
 const BookPage = memo(() => {
@@ -43,6 +46,9 @@ const BookPage = memo(() => {
   const onSubmit = async ({ data }: { data?: IBook }) => {
     if (data) {
       dispatch(bookUpdate({ ...data, id: Number(id) }))
+      toast.success('Book successful updated !', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      })
     }
     onClose()
   }
@@ -70,6 +76,18 @@ const BookPage = memo(() => {
           ''
         )}
       </div>
+      <ToastContainer
+        position='bottom-center'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </div>
   )
 })
