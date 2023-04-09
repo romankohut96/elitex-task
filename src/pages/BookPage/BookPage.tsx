@@ -42,7 +42,7 @@ const BookPage = memo(() => {
 
   const onSubmit = async ({ data }: { data?: IBook }) => {
     if (data) {
-      dispatch(bookUpdate(data))
+      dispatch(bookUpdate({ ...data, id: Number(id) }))
     }
     onClose()
   }

@@ -81,3 +81,11 @@
     text-align: start;
   }
 }
+
+@media (max-width: 550px) {
+  .table {
+    tbody {
+      height: calc(100vh - 240px);
+    }
+  }
+}
