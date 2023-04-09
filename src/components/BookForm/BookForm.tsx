@@ -18,37 +18,43 @@ const BookForm: FC<BookFormProps> = ({
   onClose,
 }) => {
   const [disabled, setDisabled] = useState(true)
+  const [touched, setTouched] = useState({
+    name: false,
+    published: false,
+    authore: false,
+  })
 
   const validate = (values: IBook) => {
     const errors: any = {}
 
-    if (!values.name) {
+    if (!values.name && touched.name) {
       errors.name = 'Field is required'
     }
-    if (values.name.length > 70) {
+    if (values.name.length > 70 && touched.name) {
       errors.name = 'Must be 70 characters or less'
     }
 
-    if (!values.published) {
+    if (!values.published && touched.published) {
       errors.published = 'Field is required'
     }
     if (
-      Number(values.published) < 1900 ||
-      Number(values.published) > new Date().getFullYear()
+      (Number(values.published) < 1900 ||
+        Number(values.published) > new Date().getFullYear()) &&
+      touched.published
     ) {
       errors.published = `Min value 1900, max value ${new Date().getFullYear()}`
     }
 
-    if (!values.authore) {
+    if (!values.authore && touched.authore) {
       errors.authore = 'Field is required'
     }
-    if (values.authore.length > 120) {
+    if (values.authore.length > 120 && touched.authore) {
       errors.authore = 'Must be 120 characters or less'
     }
 
     //counter start from 1 because book has id key
     let counter = 1
-
+    //check if value is changed
     if (book) {
       for (const key in values) {
         // @ts-ignore
@@ -57,15 +63,21 @@ const BookForm: FC<BookFormProps> = ({
         }
       }
     }
-
+    console.log(Object.values(touched))
     // @ts-ignore
     if (
       Object.keys(errors).length ||
       (book && counter === Object.keys(book).length)
     ) {
       setDisabled(true)
-    } else {
-      disabled && setDisabled(false)
+    }
+    if (!Object.keys(errors).length && disabled) {
+      if (isEditMode) {
+        setDisabled(false)
+      } else {
+        const isFieldEmpty = Object.values(touched).some((item) => !item)
+        !isFieldEmpty && setDisabled(false)
+      }
     }
 
     return errors
@@ -96,11 +108,14 @@ const BookForm: FC<BookFormProps> = ({
             id='name'
             name='name'
             type='text'
+            onFocus={() => setTouched({ ...touched, name: true })}
             onChange={formik.handleChange}
             value={formik.values.name}
-            className={formik.errors.name ? styles.error : ''}
+            className={formik.errors.name && touched.name ? styles.error : ''}
           />
-          {formik.errors.name ? <span>{formik.errors.name}</span> : null}
+          {formik.errors.name && touched.name ? (
+            <span>{formik.errors.name}</span>
+          ) : null}
         </div>
         <div>
           <label htmlFor='published'>Published year</label>
@@ -108,11 +123,14 @@ const BookForm: FC<BookFormProps> = ({
             id='published'
             name='published'
             type='number'
+            onFocus={() => setTouched({ ...touched, published: true })}
             onChange={formik.handleChange}
             value={formik.values.published}
-            className={formik.errors.published ? styles.error : ''}
+            className={
+              formik.errors.published && touched.published ? styles.error : ''
+            }
           />
-          {formik.errors.published ? (
+          {formik.errors.published && touched.published ? (
             <span>{formik.errors.published}</span>
           ) : null}
         </div>
@@ -122,11 +140,18 @@ const BookForm: FC<BookFormProps> = ({
             id='authore'
             name='authore'
             type='text'
+            onFocus={() => setTouched({ ...touched, authore: true })}
             onChange={formik.handleChange}
             value={formik.values.authore}
-            className={formik.errors.authore ? styles.error : ''}
+            className={
+              formik.errors.authore && formik.touched.authore
+                ? styles.error
+                : ''
+            }
           />
-          {formik.errors.authore ? <span>{formik.errors.authore}</span> : null}
+          {formik.errors.authore && formik.touched.authore ? (
+            <span>{formik.errors.authore}</span>
+          ) : null}
         </div>
 
         <button disabled={disabled} type='submit'>
