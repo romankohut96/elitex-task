@@ -17,7 +17,7 @@ export const bookSlice = createSlice({
   initialState,
   reducers: {
     bookAdd(state, action: PayloadAction<IBook>) {
-      state.books.push(action.payload)
+      state.books.unshift(action.payload)
     },
     bookUpdate(state, action: PayloadAction<IBook>) {
       const newProducts = state.books.map((book) => {
