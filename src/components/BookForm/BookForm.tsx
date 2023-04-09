@@ -63,7 +63,7 @@ const BookForm: FC<BookFormProps> = ({
         }
       }
     }
-    console.log(Object.values(touched))
+
     // @ts-ignore
     if (
       Object.keys(errors).length ||
@@ -144,12 +144,10 @@ const BookForm: FC<BookFormProps> = ({
             onChange={formik.handleChange}
             value={formik.values.authore}
             className={
-              formik.errors.authore && formik.touched.authore
-                ? styles.error
-                : ''
+              formik.errors.authore && touched.authore ? styles.error : ''
             }
           />
-          {formik.errors.authore && formik.touched.authore ? (
+          {formik.errors.authore && touched.authore ? (
             <span>{formik.errors.authore}</span>
           ) : null}
         </div>
