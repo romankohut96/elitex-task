@@ -83,6 +83,15 @@ const BooksList: FC<TableProps> = ({ books, handleDeleteBook }) => {
             </td>
           </tr>
         ))}
+        {!booksList?.length ? (
+          <tr>
+            <td colSpan={columns.length} className={styles.textCenter}>
+              No data
+            </td>
+          </tr>
+        ) : (
+          ''
+        )}
       </tbody>
     </table>
   )
