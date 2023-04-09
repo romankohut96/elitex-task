@@ -28,7 +28,9 @@ const Books: FC = () => {
       book.name.toLocaleLowerCase().includes(searchItem.toLocaleLowerCase()),
     )
     setTotal(bookArr.length)
-
+    if (bookArr.length <= skip) {
+      setCurrentPage(1)
+    }
     return bookArr.slice(skip, limit + skip)
   }, [currentPage, searchItem, books, total])
 
