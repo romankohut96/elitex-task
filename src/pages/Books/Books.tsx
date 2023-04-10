@@ -24,8 +24,20 @@ const Books: FC = () => {
 
   const booksList = useMemo(() => {
     const skip = (limit || 0) * (currentPage - 1)
-    let bookArr = books.filter((book) =>
-      book.name.toLocaleLowerCase().includes(searchItem.toLocaleLowerCase()),
+    let bookArr = books.filter(
+      (book) =>
+        book.name
+          .trim()
+          .toLocaleLowerCase()
+          .includes(searchItem.trim().toLocaleLowerCase()) ||
+        book.published
+          .trim()
+          .toLocaleLowerCase()
+          .includes(searchItem.trim().toLocaleLowerCase()) ||
+        book.authore
+          .trim()
+          .toLocaleLowerCase()
+          .includes(searchItem.trim().toLocaleLowerCase()),
     )
     setTotal(bookArr.length)
     if (bookArr.length <= skip) {
