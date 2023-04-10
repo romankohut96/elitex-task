@@ -110,7 +110,7 @@ const Books: FC = () => {
           onClose={onClose}
           onSubmit={() => onSubmit({ id: selectedBook?.id })}
           title={'Confirm delete'}
-          description={`Are you sure you want to remove product "${selectedBook?.name}"`}
+          description={`Are you sure you want to remove book "${selectedBook?.name}"`}
         />
       ) : (
         ''
