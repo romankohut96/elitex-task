@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { useLocation } from 'react-router-dom'
-import BackButton from '../BackButton/BackButton'
 
 import SearchBar from '../SearchBar/SearchBar'
 import styles from './header.module.scss'

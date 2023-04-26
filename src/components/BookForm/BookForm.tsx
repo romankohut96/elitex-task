@@ -26,29 +26,33 @@ const BookForm: FC<BookFormProps> = ({
 
   const validate = (values: IBook) => {
     const errors: any = {}
-
-    if (!values.name && touched.name) {
-      errors.name = 'Field is required'
-    }
-    if (values.name.length > 70 && touched.name) {
-      errors.name = 'Must be 70 characters or less'
-    }
-
-    if (!values.published && touched.published) {
-      errors.published = 'Field is required'
-    }
-    if (
+    const isNameRequired = !values.name && touched.name
+    const isNameInvalid = values.name.length > 70 && touched.name
+    const isPublishedRequired = !values.published && touched.published
+    const isPusblisedInvalid =
       (Number(values.published) < 1900 ||
         Number(values.published) > new Date().getFullYear()) &&
       touched.published
-    ) {
+    const isAuthoreRequired = !values.authore && touched.authore
+    const isAuthoreInvalid = values.authore.length > 120 && touched.authore
+
+    if (isNameRequired) {
+      errors.name = 'Field is required'
+    }
+    if (isNameInvalid) {
+      errors.name = 'Must be 70 characters or less'
+    }
+    if (isPusblisedInvalid) {
       errors.published = `Min value 1900, max value ${new Date().getFullYear()}`
     }
+    if (isPublishedRequired) {
+      errors.published = 'Field is required'
+    }
 
-    if (!values.authore && touched.authore) {
+    if (isAuthoreRequired) {
       errors.authore = 'Field is required'
     }
-    if (values.authore.length > 120 && touched.authore) {
+    if (isAuthoreInvalid) {
       errors.authore = 'Must be 120 characters or less'
     }
 
@@ -71,6 +75,7 @@ const BookForm: FC<BookFormProps> = ({
     ) {
       setDisabled(true)
     }
+
     if (!Object.keys(errors).length && disabled) {
       if (isEditMode) {
         setDisabled(false)
